@@ -59,6 +59,7 @@ namespace KinectProject
 
             createButtons();
             setBackground();
+            InitializeGestures();
         }
 
         ~MainWindow()
@@ -66,6 +67,7 @@ namespace KinectProject
             this.Dispose(false);
         }
 
+        // Dispose
         public void Dispose()
         {
             this.Dispose(true);
@@ -88,6 +90,7 @@ namespace KinectProject
             }
         }
 
+        // Draw
         private void prevBackground()
         {
             var count = backgrounds.Count;
@@ -119,6 +122,7 @@ namespace KinectProject
             Backdrop.Source = b;
         }
 
+        // Actions
         private void createButtons()
         {
             for (int i = 1; i <= backgrounds.Count; i++)
@@ -147,8 +151,6 @@ namespace KinectProject
             this.sensorChooser = null;
         }
 
-
-
         // Gestures 
         private void InitializeGestures()
         {
@@ -175,6 +177,7 @@ namespace KinectProject
             }
         }
 
+        // All Sensors
         private void SensorAllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
 
@@ -207,9 +210,6 @@ namespace KinectProject
                     if (null != skeletonFrame)
                     {
                         skeletonFrame.CopySkeletonDataTo(this.skeletons);
-                        this.backgroundRemovedColorStream.ProcessSkeleton(this.skeletons, skeletonFrame.Timestamp);
-
-
 
                         foreach (var skel in this.skeletons)
                         {
@@ -240,6 +240,8 @@ namespace KinectProject
                                 }
                             }
                         }
+
+                        this.backgroundRemovedColorStream.ProcessSkeleton(this.skeletons, skeletonFrame.Timestamp);
                     }
                 }
 
@@ -387,8 +389,6 @@ namespace KinectProject
                     {
 
                     }
-
-                    InitializeGestures();
                     
                 }
                 catch (InvalidOperationException)
